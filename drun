@@ -99,11 +99,6 @@ list_displaynames() {
     cat "$ENTRIES_CACHE_FILE"
 }
 
-if pgrep "$DMENU" > /dev/null; then
-    killall "$DMENU"
-    exit 1
-fi
-
 (reindex=true gencache_entries &) &>/dev/null
 selected=$($DMENU ${@:--i -p "apps:"} <<< "$(list_displaynames)")
 if [[ -z "$selected" ]]; then
